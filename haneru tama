@@ -1,0 +1,47 @@
+//strokeWeight
+int w = 2;
+
+//circle_D
+int D = 30;
+
+//direction
+float dx = 2;
+float dy = 0;
+
+//position
+float x = 0;
+float y = 0;
+
+//gravity
+float g = 0.2;
+
+void setup()
+{
+  //gamenn size
+  size(500, 500);
+}
+
+void draw()
+{
+  background(255, 255, 255);
+  strokeWeight(w);
+  ellipse((D + w) / 2 + x, (D + w) / 2 + y, D, D);
+  
+  dy += g;
+  
+  x += dx;
+  y += dy;
+  
+  if((D + w) / 2 + x <= (D + w) / 2) {
+    dx *= -1;
+  }
+  if((D + w) / 2 + y <= (D + w) / 2) {
+    dy *= -1;
+  }
+  if((D + w) / 2 + x >= 500 - ((D + w) / 2)) {
+    dx *= -1;
+  }
+  if((D + w) / 2 + y >= 500 - ((D + w) / 2)) {
+    dy = -13;
+  }
+}
