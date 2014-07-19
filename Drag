@@ -1,0 +1,35 @@
+float x, y, D, r;
+float px,py;
+
+void setup() {
+  size(255, 255);
+  x=random(width);
+  y=random(height);
+  D=100;
+  r=D/2;
+}
+
+void draw() {
+  background(255);
+  ellipse(x, y, D, D);
+}
+
+void mousePressed() {
+  px=x-mouseX;
+  py=y-mouseY; 
+  if(px*px+py*py<=r*r) {
+    fill(0, 255-(x+y/2), x+y/2);
+  }
+}
+
+void mouseDragged() {
+  if(px*px+py*py<=r*r) {
+    x=mouseX+px;
+    y=mouseY+py;
+    fill(0, 255-(x+y/2), x+y/2);
+  }
+}
+
+void mouseReleased() {
+  fill(255);
+}
