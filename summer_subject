@@ -1,0 +1,70 @@
+float x, y, D, r;
+float vx, vy, kx, ky;
+float px, py, pr;
+float Time;
+boolean dragging;
+
+void setup() {
+  size(750, 750);
+  D=100;
+  r=D/2;
+  x=random(50, 700);
+  y=random(50, 700);
+  vx=0;
+  vy=0;
+  kx=0;
+  ky=0;
+  Time=0;
+  dragging=false;
+}
+
+void draw() {
+  background(0);
+  Time++;
+
+  if((r > x) || (x > 750-r)) vx *= -1;
+  if((r > y) || (y > 750-r)) vy *= -1;
+  
+  if(Time%60==0) {
+    if(vx>0) vx-=abs(kx/10);
+    if(vx<0) vx+=abs(kx/10);
+    if((-0.5<=vx) && (vx<=0.5)) vx=0;
+    if(vy>0) vy-=abs(ky/10);
+    if(vy<0) vy+=abs(ky/10);
+    if((-0.5<=vy) && (vy<=0.5)) vy=0;
+  }
+  
+  if(vx==0&&vy==0) fill(255);
+
+  x+=vx;
+  y+=vy;
+  ellipse(x, y, D, D);
+  
+  if(dragging==true) {
+    stroke(0, 255, 255);
+    line(x, y, mouseX, mouseY);
+    pr=sqrt(pow(x-mouseX, 2)+pow(y-mouseY, 2));
+    kx=(x-mouseX)/10;
+    ky=(y-mouseY)/10;
+  }
+}
+
+void mousePressed() {
+  px=x-mouseX;
+  py=y-mouseY; 
+  if(px*px+py*py<=r*r) {
+    dragging=true;
+  }
+}
+
+/*void mouseDragged() {
+  
+    
+}*/
+
+void mouseReleased() {
+  dragging=false;
+  vx=kx;
+  vy=ky;
+  fill(255, 255, 0);
+}
