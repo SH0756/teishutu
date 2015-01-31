@@ -28,6 +28,7 @@ void setup(){
     if(P[i].y > P[i + 1].y) load.y += P[i].y - P[i + 1].y;
   }
   
+  P_scal = new float[2];
   for(int i = 0; i < PN - 2; i++) {
     P_scal[i] = sqrt(pow(P[i + 1].x - P[i].x, 2) + pow(P[i + 1].y - P[i].y, 2));
   }
